@@ -18,9 +18,9 @@ Then visit `http://localhost:8080`.
 
 **Netlify:** Drag-drop the folder or connect the repo. Publish directory: `.` (root).
 
-## Image note
+## Image
 
-`DSCF0149.jpg` is ~24MB at full resolution. For faster first paint in production, consider compressing to ~2000px wide at ~80% JPEG quality before deploy.
+Background is `DSCF0149.jpg` (2048×2048, ~2.7MB).
 
 ## Email list
 
