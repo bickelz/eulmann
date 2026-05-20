@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EULMANN</title>
+  <meta name="description" content="EULMANN — TECHNOPOLY">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #fce6b8;
+      --black: #211c15;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: "Josefin Sans", sans-serif;
+      font-weight: 300;
+      color: var(--accent);
+      background: var(--black);
+    }
+
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: url("DSCF0149.jpg") center / cover no-repeat;
+      z-index: 0;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(33, 28, 21, 0.72) 0%, rgba(33, 28, 21, 0.35) 45%, rgba(33, 28, 21, 0.65) 100%),
+        linear-gradient(to bottom, rgba(33, 28, 21, 0.25) 0%, rgba(33, 28, 21, 0.55) 100%);
+      z-index: 1;
+    }
+
+    .stage {
+      position: relative;
+      z-index: 2;
+      min-height: 100dvh;
+      display: grid;
+      grid-template-rows: 1fr auto auto;
+      grid-template-columns: 1fr;
+      padding:
+        max(1.5rem, env(safe-area-inset-top))
+        max(1.75rem, env(safe-area-inset-right))
+        max(1.5rem, env(safe-area-inset-bottom))
+        max(1.75rem, env(safe-area-inset-left));
+      gap: clamp(1rem, 3vh, 2.5rem);
+    }
+
+    .brand {
+      align-self: start;
+      justify-self: start;
+      position: relative;
+      padding-left: 1.25rem;
+    }
+
+    .brand::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.15em;
+      bottom: 0.15em;
+      width: 1px;
+      background: var(--accent);
+    }
+
+    .brand::after {
+      content: "";
+      position: absolute;
+      left: -0.35rem;
+      top: 0;
+      width: 0.7rem;
+      height: 1px;
+      background: var(--accent);
+      box-shadow: 0 calc(100% - 1px) 0 var(--accent);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      font-weight: 300;
+      letter-spacing: 0.42em;
+      text-indent: 0.42em;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .tagline {
+      margin: clamp(0.5rem, 1.5vh, 1rem) 0 0;
+      font-size: clamp(0.65rem, 2vw, 0.95rem);
+      font-weight: 400;
+      letter-spacing: 0.55em;
+      text-indent: 0.55em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .links {
+      align-self: end;
+      justify-self: center;
+      width: 100%;
+      max-width: 52rem;
+      text-align: center;
+    }
+
+    .links::before,
+    .links::after {
+      content: "";
+      display: block;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--accent) 15%,
+        var(--accent) 85%,
+        transparent 100%
+      );
+      margin-bottom: clamp(0.75rem, 2vh, 1.25rem);
+    }
+
+    .links::after {
+      margin-bottom: 0;
+      margin-top: clamp(0.75rem, 2vh, 1.25rem);
+    }
+
+    .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.35rem 0;
+      font-size: clamp(0.55rem, 1.6vw, 0.78rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .link-row a {
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.15rem 0.1rem;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .link-row a:hover,
+    .link-row a:focus-visible {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      outline: none;
+    }
+
+    .link-row .sep {
+      color: var(--accent);
+      padding: 0 0.35rem;
+      user-select: none;
+    }
+
+    .signup {
+      align-self: end;
+      justify-self: center;
+      width: 100%;
+      max-width: 22rem;
+    }
+
+    .signup-link {
+      display: block;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-family: inherit;
+      font-size: clamp(0.55rem, 1.4vw, 0.7rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-align: center;
+      text-decoration: none;
+      color: var(--accent);
+      background: var(--black);
+      border: 1px solid var(--accent);
+      transition: border-color 0.2s ease;
+    }
+
+    .signup-link:hover,
+    .signup-link:focus-visible {
+      opacity: 0.85;
+      outline: none;
+    }
+
+    @media (max-width: 640px) {
+      .stage {
+        gap: clamp(0.65rem, 2vh, 1.25rem);
+        padding:
+          max(1rem, env(safe-area-inset-top))
+          max(1.1rem, env(safe-area-inset-right))
+          max(1rem, env(safe-area-inset-bottom))
+          max(1.1rem, env(safe-area-inset-left));
+      }
+
+      .brand {
+        padding-left: 0.85rem;
+      }
+
+      .brand h1 {
+        letter-spacing: 0.28em;
+        text-indent: 0.28em;
+      }
+
+      .tagline {
+        letter-spacing: 0.38em;
+        text-indent: 0.38em;
+      }
+
+      .link-row {
+        letter-spacing: 0.14em;
+        font-size: clamp(0.5rem, 2.8vw, 0.62rem);
+        line-height: 1.6;
+      }
+
+      .link-row .sep {
+        padding: 0 0.2rem;
+      }
+
+      .signup {
+        max-width: 100%;
+      }
+
+      .signup-link {
+        padding: 0.6rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .link-row a,
+      .signup-link {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="overlay" aria-hidden="true"></div>
+
+  <main class="stage">
+    <header class="brand">
+      <h1>EULMANN</h1>
+      <p class="tagline">TECHNOPOLY</p>
+    </header>
+
+    <nav class="links" aria-label="Listen and follow">
+      <div class="link-row">
+        <a href="https://eulmann.bandcamp.com/" target="_blank" rel="noopener noreferrer">Bandcamp</a>
+        <span class="sep" aria-hidden="true">·</span>
+        <a href="https://soundcloud.com/eulmann" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+        <span class="sep" aria-hidden="true">·</span>
+        <a href="https://youtube.com/@eulmann_music" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <span class="sep" aria-hidden="true">·</span>
+        <a href="https://www.instagram.com/eulmann.music/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <span class="sep" aria-hidden="true">·</span>
+        <a href="https://x.com/eulmann_music" target="_blank" rel="noopener noreferrer">X</a>
+        <span class="sep" aria-hidden="true">·</span>
+        <a href="https://www.tiktok.com/@eulmann" target="_blank" rel="noopener noreferrer">TikTok</a>
+        <span class="sep" aria-hidden="true">·</span>
+        <a href="https://eulmann.substack.com/" target="_blank" rel="noopener noreferrer">Substack</a>
+      </div>
+    </nav>
+
+    <section class="signup" aria-label="Follow for updates">
+      <a
+        class="signup-link"
+        href="https://eulmann.substack.com/subscribe"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Follow for Updates</a>
+    </section>
+  </main>
+</body>
+</html>
